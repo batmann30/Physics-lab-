@@ -203,6 +203,7 @@ function createEmptyState(accountId: string): RewardProgressState {
     attemptedQuizExpIds: [],
     guidedActivityIds: [],
     languagesUsed: ['en'],
+    dailyChallengeDates: [],
   };
 }
 
@@ -234,6 +235,9 @@ export function loadRewardState(accountId?: string | null): RewardProgressState 
         Array.isArray(parsed.languagesUsed) && parsed.languagesUsed.length > 0
           ? (parsed.languagesUsed as LanguageCode[])
           : ['en'],
+      dailyChallengeDates: Array.isArray(parsed.dailyChallengeDates)
+        ? parsed.dailyChallengeDates
+        : [],
     };
   } catch {
     return fallback;
@@ -279,7 +283,8 @@ export type RewardMilestoneEvent =
   | { type: 'observation_recorded'; experimentId: string }
   | { type: 'quiz_submitted'; experimentId: string; score: number; total: number }
   | { type: 'guided_activity_completed'; activityId: string; engineId?: SimulationEngineId }
-  | { type: 'language_used'; language: LanguageCode };
+  | { type: 'language_used'; language: LanguageCode }
+  | { type: 'daily_challenge_solved'; dateIso: string };
 
 export function recordRewardAction(
   accountId: string | null | undefined,
@@ -297,6 +302,7 @@ export function recordRewardAction(
     attemptedQuizExpIds: [...prev.attemptedQuizExpIds],
     guidedActivityIds: [...prev.guidedActivityIds],
     languagesUsed: [...prev.languagesUsed],
+    dailyChallengeDates: [...(prev.dailyChallengeDates ?? [])],
   };
 
   let xpEarned = 0;
@@ -377,6 +383,14 @@ export function recordRewardAction(
         xpEarned += 10;
         unlockBadge('multilingual_explorer', newlyUnlockedBadges);
       }
+    }
+  } else if (event.type === 'daily_challenge_solved') {
+    touchStreak = true;
+    const solvedDates = next.dailyChallengeDates ?? [];
+    if (!solvedDates.includes(event.dateIso)) {
+      solvedDates.push(event.dateIso);
+      next.dailyChallengeDates = solvedDates;
+      xpEarned += 20;
     }
   }
 

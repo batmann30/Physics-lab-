@@ -66,7 +66,9 @@ import {
   submitStudentGuidedCompletion,
 } from './services/localAuthDb';
 import { Navbar } from './components/Navbar';
-import { DashboardView } from './components/DashboardView';
+import { SidebarNav, type SidebarItemId } from './components/SidebarNav';
+import { DashboardView, type LastAccessedExperimentInfo } from './components/DashboardView';
+import { AchievementsModal } from './components/AchievementsModal';
 import { ConceptExplorerView } from './components/ConceptExplorerView';
 import { SimulationLabView } from './components/SimulationLabView';
 import { MyLearningView } from './components/MyLearningView';
@@ -78,10 +80,39 @@ import { TeacherPortalView } from './components/TeacherPortalView';
 import { PortalErrorBoundary } from './components/PortalErrorBoundary';
 import { ConceptExperimentChooserModal } from './components/ConceptExperimentChooserModal';
 import { ExperimentActivityModal } from './components/ExperimentActivityModal';
+import { PhysicsAmbientBackdrop } from './components/PhysicsAmbientBackdrop';
 
 const PREFS_STORAGE_KEY = 'physix_ai_preferences_v1';
 const SESSIONS_STORAGE_KEY = 'physix_ai_sessions_v1';
 const PROGRESS_STORAGE_KEY = 'physix_ai_progress_v1';
+const LAST_ACCESSED_KEY_PREFIX = 'physix_last_exp_v1_';
+
+function loadLastAccessedExperiment(accountId?: string | null): LastAccessedExperimentInfo | null {
+  try {
+    const raw = localStorage.getItem(`${LAST_ACCESSED_KEY_PREFIX}${accountId || 'guest'}`);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<LastAccessedExperimentInfo>;
+    if (!parsed || typeof parsed.experimentId !== 'string' || !parsed.experimentId) return null;
+    return {
+      experimentId: parsed.experimentId,
+      accessedAt: typeof parsed.accessedAt === 'string' ? parsed.accessedAt : new Date().toISOString(),
+      mode: parsed.mode === '3d' ? '3d' : '2d',
+    };
+  } catch {
+    return null;
+  }
+}
+
+function saveLastAccessedExperiment(
+  accountId: string | null | undefined,
+  info: LastAccessedExperimentInfo
+): void {
+  try {
+    localStorage.setItem(`${LAST_ACCESSED_KEY_PREFIX}${accountId || 'guest'}`, JSON.stringify(info));
+  } catch {
+    // Ignore storage quota issues
+  }
+}
 
 const VALID_CLASSES: readonly GradeClassLevel[] = [6, 7, 8, 9, 10];
 
@@ -230,6 +261,13 @@ export default function App() {
   const [teacherGuidedActivities, setTeacherGuidedActivities] = useState<GuidedClassroomActivity[]>([]);
   const [teacherGuidedCompletions, setTeacherGuidedCompletions] = useState<GuidedActivityCompletion[]>([]);
   const [initialTutorPrefill, setInitialTutorPrefill] = useState<string | null>(null);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [achievementsOpen, setAchievementsOpen] = useState(false);
+  const [lastAccessedExperiment, setLastAccessedExperiment] =
+    useState<LastAccessedExperimentInfo | null>(() => loadLastAccessedExperiment('guest'));
+  const [recentCompletedExperimentId, setRecentCompletedExperimentId] = useState<string | null>(
+    null
+  );
 
   // Track if initial session restoration already redirected
   const restoredSessionRef = useRef(false);
@@ -249,10 +287,25 @@ export default function App() {
 
   useEffect(() => {
     setRewardState(loadRewardState(userProfile?.uid ?? 'guest'));
+    setLastAccessedExperiment(loadLastAccessedExperiment(userProfile?.uid));
+    setRecentCompletedExperimentId(null);
     loadSavedDynamicExperiments(userProfile?.uid)
       .then(setSavedDynamicExperiments)
       .catch(() => {});
   }, [userProfile?.uid]);
+
+  const recordExperimentAccess = useCallback(
+    (experimentId: string, mode: SimulationMode) => {
+      const info: LastAccessedExperimentInfo = {
+        experimentId,
+        accessedAt: new Date().toISOString(),
+        mode,
+      };
+      setLastAccessedExperiment(info);
+      saveLastAccessedExperiment(userProfile?.uid, info);
+    },
+    [userProfile?.uid]
+  );
 
   const handleRecordRewardEvent = useCallback(
     (event: RewardMilestoneEvent) => {
@@ -414,11 +467,15 @@ export default function App() {
       });
     }
     if (patch.markCompleted) {
+      setRecentCompletedExperimentId(experimentId);
       handleRecordRewardEvent({
         type: 'experiment_completed',
         experimentId,
         engineId: expMeta?.simulationEngineId ?? undefined,
       });
+    }
+    if (patch.observation?.trim() || typeof patch.quizScore === 'number' || patch.markCompleted) {
+      recordExperimentAccess(experimentId, activeLabMode);
     }
 
     // When signed in as a student, persist strictly to this student's IndexedDB scope
@@ -583,10 +640,12 @@ export default function App() {
     experiment: ExperimentCatalogItem,
     mode?: SimulationMode
   ) => {
+    const resolvedMode = mode ?? preferences.defaultSimulationMode;
     setActiveGuidedActivity(null);
     setActiveDynamicExperiment(null);
     setActiveExperiment(experiment);
-    setActiveLabMode(mode ?? preferences.defaultSimulationMode);
+    setActiveLabMode(resolvedMode);
+    recordExperimentAccess(experiment.id, resolvedMode);
     setCurrentView('lab');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -706,10 +765,14 @@ export default function App() {
 
   const handleLaunchGuidedActivity = (activity: GuidedClassroomActivity) => {
     const exp = EXPERIMENT_CATALOGUE.find((e) => e.id === activity.experimentId) || null;
+    const resolvedMode = preferences.defaultSimulationMode;
     setActiveDynamicExperiment(null);
     setActiveExperiment(exp);
     setActiveGuidedActivity(activity);
-    setActiveLabMode(preferences.defaultSimulationMode);
+    setActiveLabMode(resolvedMode);
+    if (exp) {
+      recordExperimentAccess(exp.id, resolvedMode);
+    }
     setCurrentView('lab');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -838,6 +901,7 @@ export default function App() {
   // Strict Role-Based Navigation Guard
   const handleNavigate = (view: AppView) => {
     setAccessNotice(null);
+    setMobileSidebarOpen(false);
 
     if (view === 'teacher_portal') {
       if (!userProfile) {
@@ -879,8 +943,55 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleSidebarSelect = (item: SidebarItemId) => {
+    setAccessNotice(null);
+    setMobileSidebarOpen(false);
+
+    switch (item) {
+      case 'home':
+        handleNavigate('home');
+        return;
+      case 'learn':
+        if (activeAnalysis) {
+          handleNavigate('concepts');
+        } else {
+          handleOpenSampleConcepts();
+        }
+        return;
+      case 'experiments':
+        handleNavigate('explore');
+        return;
+      case 'ai_tutor':
+        handleAskNovaFromDashboard();
+        return;
+      case 'scan_textbook':
+        if (currentView !== 'home') {
+          setCurrentView('home');
+        }
+        window.setTimeout(() => {
+          document
+            .getElementById('textbook-upload-section')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 80);
+        return;
+      case 'my_progress':
+        if (userProfile?.role === 'teacher') {
+          handleNavigate('teacher_portal');
+        } else if (userProfile?.role === 'student') {
+          handleNavigate('student_portal');
+        } else {
+          handleNavigate('learning');
+        }
+        return;
+      case 'achievements':
+        setAchievementsOpen(true);
+        return;
+    }
+  };
+
   const handleOpenPortalAuth = (role: UserRole = 'student', mode: 'login' | 'register' = 'login') => {
     setAccessNotice(null);
+    setMobileSidebarOpen(false);
     setAuthIntentRole(role);
     setAuthIntentMode(mode);
     setCurrentView('auth');
@@ -920,6 +1031,8 @@ export default function App() {
     setActiveGuidedActivity(null);
     setLatestBadgeToast(null);
     setInitialTutorPrefill(null);
+    setRecentCompletedExperimentId(null);
+    setLastAccessedExperiment(loadLastAccessedExperiment('guest'));
     setRewardState(loadRewardState('guest'));
     setLocalProgress(loadLocalStudentProgress());
     setSessions(loadSessions());
@@ -942,64 +1055,104 @@ export default function App() {
         onNavigate={handleNavigate}
         language={preferences.language}
         onLanguageChange={handleLanguageChange}
+        selectedClass={effectiveSelectedClass}
+        lockedClass={lockedStudentClass}
+        onSelectClass={(cls) => handleSelectClass(cls, currentView === 'explore')}
         userProfile={userProfile}
         authReady={authReady}
+        teacherNotifications={teacherNotifications}
+        studentGuidedActivities={studentGuidedActivities}
+        latestBadgeToast={latestBadgeToast}
+        onDismissBadgeToast={() => setLatestBadgeToast(null)}
+        onOpenGuidedActivity={handleLaunchGuidedActivity}
+        onToggleMobileSidebar={() => setMobileSidebarOpen((v) => !v)}
+        mobileSidebarOpen={mobileSidebarOpen}
         onOpenAuth={() => handleOpenPortalAuth('student', 'login')}
         onLogout={handleLogout}
         t={t}
       />
 
-      {accessNotice && (
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4">
-          <div
-            role="alert"
-            className="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#E7B5AF] text-xs sm:text-sm text-[#7A271A] flex items-center justify-between gap-3"
-          >
-            <div className="flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 shrink-0" />
-              <span>{accessNotice}</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setAccessNotice(null)}
-              className="text-xs font-semibold underline cursor-pointer"
-            >
-              Dismiss
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="flex-1 flex min-w-0">
+        <SidebarNav
+          currentView={currentView}
+          activeSidebarOverride={achievementsOpen ? 'achievements' : null}
+          language={preferences.language}
+          userProfile={userProfile}
+          rewardState={rewardState}
+          reducedMotion={preferences.reducedMotion}
+          mobileOpen={mobileSidebarOpen}
+          onCloseMobile={() => setMobileSidebarOpen(false)}
+          onSelectItem={handleSidebarSelect}
+          onNavigateView={handleNavigate}
+          onOpenAuth={() => handleOpenPortalAuth('student', 'login')}
+        />
 
-      <main className="flex-1">
-        <PortalErrorBoundary onResetView={() => handleNavigate('home')}>
-          {currentView === 'home' && (
-            <DashboardView
-              language={preferences.language}
-              t={t}
-              geminiConfigured={geminiConfigured}
-              selectedClass={effectiveSelectedClass}
-              lockedClass={lockedStudentClass}
-              studentProgress={effectiveStudentProgress}
-              userProfile={userProfile}
-              rewardState={rewardState}
-              latestBadgeToast={latestBadgeToast}
-              reducedMotion={preferences.reducedMotion}
-              onDismissBadgeToast={() => setLatestBadgeToast(null)}
-              onAskNovaFromDashboard={handleAskNovaFromDashboard}
-              onOpenPortalAuth={handleOpenPortalAuth}
-              onOpenActivePortal={() =>
-                handleNavigate(
-                  userProfile?.role === 'teacher' ? 'teacher_portal' : 'student_portal'
-                )
-              }
-              onSelectClass={(cls) => handleSelectClass(cls, true)}
-              onAnalysisComplete={handleAnalysisComplete}
-              onOpenLab={() => handleLaunchLab()}
-              onLaunchExperiment={handleLaunchExperiment}
-              onSaveProgress={handleSaveExperimentProgress}
-              onOpenSampleConcepts={handleOpenSampleConcepts}
-            />
+        <div className="relative flex-1 flex flex-col min-w-0">
+          {currentView !== 'lab' && (
+            <PhysicsAmbientBackdrop reducedMotion={preferences.reducedMotion} />
           )}
+
+          {accessNotice && (
+            <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4">
+              <div
+                role="alert"
+                className="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#E7B5AF] text-xs sm:text-sm text-[#7A271A] flex items-center justify-between gap-3"
+              >
+                <div className="flex items-center gap-2">
+                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                  <span>{accessNotice}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAccessNotice(null)}
+                  className="text-xs font-semibold underline cursor-pointer"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          )}
+
+          <main className="relative z-10 flex-1 min-w-0">
+            <PortalErrorBoundary onResetView={() => handleNavigate('home')}>
+              {currentView === 'home' && (
+                <DashboardView
+                  language={preferences.language}
+                  t={t}
+                  geminiConfigured={geminiConfigured}
+                  selectedClass={effectiveSelectedClass}
+                  lockedClass={lockedStudentClass}
+                  studentProgress={effectiveStudentProgress}
+                  userProfile={userProfile}
+                  rewardState={rewardState}
+                  latestBadgeToast={latestBadgeToast}
+                  reducedMotion={preferences.reducedMotion}
+                  sessionsCount={sessions.length}
+                  savedDynamicCount={savedDynamicExperiments.length}
+                  lastAccessedExperiment={lastAccessedExperiment}
+                  recentCompletedExperimentId={recentCompletedExperimentId}
+                  onDismissRecentCompletion={() => setRecentCompletedExperimentId(null)}
+                  onSolveDailyChallenge={(dateIso) =>
+                    handleRecordRewardEvent({ type: 'daily_challenge_solved', dateIso })
+                  }
+                  onDismissBadgeToast={() => setLatestBadgeToast(null)}
+                  onAskNovaFromDashboard={handleAskNovaFromDashboard}
+                  onOpenPortalAuth={handleOpenPortalAuth}
+                  onOpenActivePortal={() =>
+                    handleNavigate(
+                      userProfile?.role === 'teacher' ? 'teacher_portal' : 'student_portal'
+                    )
+                  }
+                  onOpenAchievements={() => setAchievementsOpen(true)}
+                  onOpenExperimentsLibrary={() => handleNavigate('explore')}
+                  onSelectClass={(cls) => handleSelectClass(cls, true)}
+                  onAnalysisComplete={handleAnalysisComplete}
+                  onOpenLab={() => handleLaunchLab()}
+                  onLaunchExperiment={handleLaunchExperiment}
+                  onSaveProgress={handleSaveExperimentProgress}
+                  onOpenSampleConcepts={handleOpenSampleConcepts}
+                />
+              )}
 
           {currentView === 'auth' && (
             <AuthPortalView
@@ -1171,8 +1324,17 @@ export default function App() {
               onLogout={handleLogout}
             />
           )}
-        </PortalErrorBoundary>
-      </main>
+            </PortalErrorBoundary>
+          </main>
+
+          <footer className="border-t border-[#D8D1CA] bg-white/70 mt-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#756B63]">
+              <p className="font-medium text-[#302820]">{t.footer.tagline}</p>
+              <p>{t.footer.languagesNote}</p>
+            </div>
+          </footer>
+        </div>
+      </div>
 
       {conceptChooser && (
         <ConceptExperimentChooserModal
@@ -1196,12 +1358,13 @@ export default function App() {
         />
       )}
 
-      <footer className="border-t border-[#D8D1CA] bg-white/70 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#756B63]">
-          <p className="font-medium text-[#302820]">{t.footer.tagline}</p>
-          <p>{t.footer.languagesNote}</p>
-        </div>
-      </footer>
+      <AchievementsModal
+        isOpen={achievementsOpen}
+        language={preferences.language}
+        rewardState={rewardState}
+        reducedMotion={preferences.reducedMotion}
+        onClose={() => setAchievementsOpen(false)}
+      />
     </div>
   );
 }

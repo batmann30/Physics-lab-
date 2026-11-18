@@ -351,7 +351,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
       <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-8 space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#2B5B6C]">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#6F4E37]">
               <Users className="w-4 h-4" />
               <span>Teacher Portal</span>
               <span aria-hidden="true">·</span>
@@ -386,14 +386,14 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
               aria-label={`Notifications (${unreadNotificationCount} unread)`}
               className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm font-semibold transition-colors cursor-pointer min-h-[44px] whitespace-nowrap ${
                 unreadNotificationCount > 0
-                  ? 'bg-[#E8F1F4] border-[#2B5B6C] text-[#1E4350]'
-                  : 'bg-[#F7F5F2] border-[#D8D1CA] text-[#302820] hover:border-[#2B5B6C]'
+                  ? 'bg-[#E6E0F0] border-[#6F4E37] text-[#302820]'
+                  : 'bg-[#F7F5F2] border-[#D8D1CA] text-[#302820] hover:border-[#6F4E37]'
               }`}
             >
-              <Bell className="w-4 h-4 text-[#2B5B6C]" />
+              <Bell className="w-4 h-4 text-[#6F4E37]" />
               <span>Notifications</span>
               {unreadNotificationCount > 0 && (
-                <span className="font-mono-tabular px-1.5 py-0.5 rounded bg-[#2B5B6C] text-white text-xs leading-none">
+                <span className="font-mono-tabular px-1.5 py-0.5 rounded bg-[#6F4E37] text-white text-xs leading-none">
                   {unreadNotificationCount}
                 </span>
               )}
@@ -402,7 +402,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
             <button
               type="button"
               onClick={() => setShowCreateForm((prev) => !prev)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2B5B6C] text-white text-sm font-semibold hover:bg-[#1E4350] transition-colors cursor-pointer min-h-[44px] whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#6F4E37] text-white text-sm font-semibold hover:bg-[#5C402C] transition-colors cursor-pointer min-h-[44px] whitespace-nowrap"
             >
               <Plus className="w-4 h-4" />
               <span>{showCreateForm ? 'Close Form' : 'Create Class'}</span>
@@ -414,7 +414,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                 setEditSchool(profile.schoolOrSubject || '');
                 setEditingProfile((prev) => !prev);
               }}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#E8F1F4] text-[#1E4350] text-sm font-medium hover:bg-[#D7E7ED] transition-colors cursor-pointer min-h-[44px] whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#E6E0F0] text-[#302820] text-sm font-medium hover:bg-[#DCD3EA] transition-colors cursor-pointer min-h-[44px] whitespace-nowrap"
             >
               <Edit3 className="w-4 h-4" />
               <span>{editingProfile ? 'Close Profile' : 'Teacher Profile'}</span>
@@ -451,7 +451,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                     type="button"
                     disabled={updatingNotifs}
                     onClick={handleMarkAllRead}
-                    className="text-xs font-semibold text-[#2B5B6C] hover:underline cursor-pointer disabled:opacity-60"
+                    className="text-xs font-semibold text-[#6F4E37] hover:underline cursor-pointer disabled:opacity-60"
                   >
                     Mark all as read
                   </button>
@@ -480,21 +480,21 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                     className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors ${
                       n.isRead
                         ? 'bg-[#F7F5F2] border-[#D8D1CA]'
-                        : 'bg-[#E8F1F4]/70 border-[#2B5B6C]'
+                        : 'bg-[#E6E0F0]/70 border-[#6F4E37]'
                     }`}
                   >
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <UserPlus className="w-3.5 h-3.5 text-[#2B5B6C]" />
+                        <UserPlus className="w-3.5 h-3.5 text-[#6F4E37]" />
                         <span className="font-semibold text-[#302820]">{n.title}</span>
                         <span aria-hidden="true">·</span>
-                        <span className="font-medium text-[#2B5B6C]">
+                        <span className="font-medium text-[#6F4E37]">
                           {n.className} (Class {n.classGrade})
                         </span>
                         {!n.isRead && (
                           <>
                             <span aria-hidden="true">·</span>
-                            <span className="font-semibold text-[#2B5B6C]">Unread</span>
+                            <span className="font-semibold text-[#6F4E37]">Unread</span>
                           </>
                         )}
                       </div>
@@ -513,7 +513,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                             handleMarkNotificationRead(n.notificationId);
                           }
                         }}
-                        className="px-3 py-1.5 rounded-lg border border-[#D8D1CA] bg-white text-xs font-semibold text-[#2B5B6C] hover:border-[#2B5B6C] cursor-pointer"
+                        className="px-3 py-1.5 rounded-lg border border-[#D8D1CA] bg-white text-xs font-semibold text-[#6F4E37] hover:border-[#6F4E37] cursor-pointer"
                       >
                         View Class
                       </button>
@@ -522,7 +522,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                           type="button"
                           disabled={updatingNotifs}
                           onClick={() => handleMarkNotificationRead(n.notificationId)}
-                          className="px-3 py-1.5 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold hover:bg-[#1E4350] cursor-pointer disabled:opacity-60"
+                          className="px-3 py-1.5 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold hover:bg-[#5C402C] cursor-pointer disabled:opacity-60"
                         >
                           Mark read
                         </button>
@@ -568,7 +568,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
               <button
                 type="submit"
                 disabled={savingProfile}
-                className="w-full py-2.5 px-4 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold hover:bg-[#1E4350] cursor-pointer disabled:opacity-60 min-h-[42px]"
+                className="w-full py-2.5 px-4 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold hover:bg-[#5C402C] cursor-pointer disabled:opacity-60 min-h-[42px]"
               >
                 {savingProfile ? 'Saving...' : 'Save'}
               </button>
@@ -608,7 +608,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                       onClick={() => setNewClassGrade(cls)}
                       className={`py-2 rounded-lg border text-xs font-semibold cursor-pointer ${
                         newClassGrade === cls
-                          ? 'bg-[#2B5B6C] border-[#2B5B6C] text-white'
+                          ? 'bg-[#6F4E37] border-[#6F4E37] text-white'
                           : 'bg-[#F7F5F2] border-[#D8D1CA] text-[#302820]'
                       }`}
                     >
@@ -644,7 +644,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
               <button
                 type="submit"
                 disabled={creating}
-                className="px-5 py-2 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold hover:bg-[#1E4350] cursor-pointer disabled:opacity-60"
+                className="px-5 py-2 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold hover:bg-[#5C402C] cursor-pointer disabled:opacity-60"
               >
                 {creating ? 'Creating Class...' : 'Create Class & Generate Join Code'}
               </button>
@@ -664,7 +664,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-2xl border border-[#D8D1CA] p-5 space-y-1">
           <p className="text-xs text-[#756B63]">Created Classes</p>
-          <p className="text-2xl font-bold text-[#2B5B6C] font-mono-tabular">{classes.length}</p>
+          <p className="text-2xl font-bold text-[#6F4E37] font-mono-tabular">{classes.length}</p>
         </div>
         <div className="bg-white rounded-2xl border border-[#D8D1CA] p-5 space-y-1">
           <p className="text-xs text-[#756B63]">Total Enrolled Students</p>
@@ -689,7 +689,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
       {/* Class List + Classroom Detail / Student Progress */}
       {classes.length === 0 ? (
         <section className="bg-white rounded-2xl border border-[#D8D1CA] p-10 text-center space-y-4">
-          <div className="w-12 h-12 mx-auto rounded-xl bg-[#E8F1F4] text-[#2B5B6C] flex items-center justify-center">
+          <div className="w-12 h-12 mx-auto rounded-xl bg-[#E6E0F0] text-[#6F4E37] flex items-center justify-center">
             <GraduationCap className="w-6 h-6" />
           </div>
           <div className="space-y-1 max-w-md mx-auto">
@@ -702,7 +702,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
           <button
             type="button"
             onClick={() => setShowCreateForm(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2B5B6C] text-white text-sm font-semibold hover:bg-[#1E4350] cursor-pointer min-h-[44px]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#6F4E37] text-white text-sm font-semibold hover:bg-[#5C402C] cursor-pointer min-h-[44px]"
           >
             <Plus className="w-4 h-4" />
             <span>Create Your First Class</span>
@@ -722,8 +722,8 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                     key={cls.classId}
                     className={`rounded-2xl border p-4 transition-colors space-y-3 ${
                       isSelected
-                        ? 'bg-white border-[#2B5B6C] ring-1 ring-[#2B5B6C]'
-                        : 'bg-white border-[#D8D1CA] hover:border-[#2B5B6C]/60'
+                        ? 'bg-white border-[#6F4E37] ring-1 ring-[#6F4E37]'
+                        : 'bg-white border-[#D8D1CA] hover:border-[#6F4E37]/60'
                     }`}
                   >
                     <button
@@ -732,7 +732,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                       className="w-full text-left space-y-1 cursor-pointer"
                     >
                       <div className="flex items-center justify-between gap-2 text-xs">
-                        <span className="font-semibold text-[#2B5B6C]">Class {cls.classGrade}</span>
+                        <span className="font-semibold text-[#6F4E37]">Class {cls.classGrade}</span>
                         <span className="font-mono-tabular text-[#756B63]">
                           {enrolledCount} {enrolledCount === 1 ? 'student' : 'students'}
                         </span>
@@ -747,11 +747,11 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                       <button
                         type="button"
                         onClick={() => handleCopyCode(cls.joinCode)}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F7F5F2] border border-[#D8D1CA] text-xs font-mono font-semibold text-[#302820] hover:border-[#2B5B6C] cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#F7F5F2] border border-[#D8D1CA] text-xs font-mono font-semibold text-[#302820] hover:border-[#6F4E37] cursor-pointer"
                       >
                         <span>{cls.joinCode}</span>
                         {copiedCode === cls.joinCode ? (
-                          <Check className="w-3.5 h-3.5 text-[#2B7A78]" />
+                          <Check className="w-3.5 h-3.5 text-[#6F4E37]" />
                         ) : (
                           <Copy className="w-3.5 h-3.5 text-[#756B63]" />
                         )}
@@ -767,7 +767,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                             setEditClassDesc(cls.description || '');
                           }}
                           aria-label={`Edit ${cls.className}`}
-                          className="p-2 rounded-lg text-[#756B63] hover:text-[#2B5B6C] hover:bg-[#F7F5F2] cursor-pointer"
+                          className="p-2 rounded-lg text-[#756B63] hover:text-[#6F4E37] hover:bg-[#F7F5F2] cursor-pointer"
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
@@ -823,7 +823,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                           <button
                             type="button"
                             onClick={() => handleSaveClassEdit(cls)}
-                            className="px-3 py-1.5 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold cursor-pointer"
+                            className="px-3 py-1.5 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold cursor-pointer"
                           >
                             Save
                           </button>
@@ -842,7 +842,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
               <div className="bg-white rounded-2xl border border-[#D8D1CA] p-6 space-y-5">
                 <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#D8D1CA] pb-4">
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#2B5B6C]">
+                    <div className="flex items-center gap-2 text-xs font-semibold text-[#6F4E37]">
                       <span>Class {activeClass.classGrade}</span>
                       <span aria-hidden="true">·</span>
                       <span>Join Code: {activeClass.joinCode}</span>
@@ -857,7 +857,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                   <button
                     type="button"
                     onClick={() => onOpenLibraryForGrade(activeClass.classGrade)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#E8F1F4] text-[#1E4350] text-xs font-semibold hover:bg-[#D7E7ED] cursor-pointer whitespace-nowrap"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#E6E0F0] text-[#302820] text-xs font-semibold hover:bg-[#DCD3EA] cursor-pointer whitespace-nowrap"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
                     <span>Preview Class {activeClass.classGrade} Library</span>
@@ -891,7 +891,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                       </div>
                       <div className="p-4 rounded-xl bg-[#F7F5F2] border border-[#D8D1CA]">
                         <p className="text-xs text-[#756B63]">Completed Labs</p>
-                        <p className="text-xl font-bold text-[#2B5B6C] font-mono-tabular mt-0.5">
+                        <p className="text-xl font-bold text-[#6F4E37] font-mono-tabular mt-0.5">
                           {activeClassProgress.filter((p) => p.completionStatus === 'completed').length}
                         </p>
                       </div>
@@ -942,7 +942,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                                   <td className="py-3 px-4 font-mono-tabular text-[#756B63]">
                                     Class {member.studentSelectedClass}
                                   </td>
-                                  <td className="py-3 px-4 font-mono-tabular text-[#2B5B6C] font-semibold">
+                                  <td className="py-3 px-4 font-mono-tabular text-[#6F4E37] font-semibold">
                                     {studentCompleted.length}
                                   </td>
                                   <td className="py-3 px-4 font-mono-tabular text-[#302820]">
@@ -968,7 +968,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                     {activeClassAssessments.length > 0 && (
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                          <Award className="w-4 h-4 text-[#2B5B6C]" />
+                          <Award className="w-4 h-4 text-[#6F4E37]" />
                           <h3 className="text-sm font-semibold text-[#302820]">
                             Recent Assessment Results
                           </h3>
@@ -987,7 +987,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                                   {new Date(item.completedAt).toLocaleString()}
                                 </p>
                               </div>
-                              <span className="font-mono-tabular text-sm font-bold text-[#2B5B6C]">
+                              <span className="font-mono-tabular text-sm font-bold text-[#6F4E37]">
                                 {item.score}/{item.totalQuestions}
                               </span>
                             </div>
@@ -999,7 +999,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                     {/* Class Activity Feed (Persistent Real Student Events) */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-[#2B5B6C]" />
+                        <Clock className="w-4 h-4 text-[#6F4E37]" />
                         <h3 className="text-sm font-semibold text-[#302820]">
                           Recent Class Activity Feed
                         </h3>
@@ -1019,9 +1019,9 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                             >
                               <div className="flex items-start gap-2.5">
                                 {ev.eventType === 'student_joined' ? (
-                                  <UserPlus className="w-4 h-4 text-[#2B5B6C] shrink-0 mt-0.5" />
+                                  <UserPlus className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                                 ) : ev.eventType === 'experiment_completed' ? (
-                                  <CheckCircle2 className="w-4 h-4 text-[#2B7A78] shrink-0 mt-0.5" />
+                                  <CheckCircle2 className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                                 ) : (
                                   <Award className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                                 )}
@@ -1060,7 +1060,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                         }
                         setShowGuidedBuilder((v) => !v);
                       }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold hover:bg-[#1E4350] cursor-pointer whitespace-nowrap"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold hover:bg-[#5C402C] cursor-pointer whitespace-nowrap"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>{showGuidedBuilder ? 'Close Builder' : 'Launch Guided Activity'}</span>
@@ -1142,7 +1142,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                           type="submit"
                           data-testid="confirm-launch-guided-btn"
                           disabled={launchingGuided}
-                          className="px-4 py-2 rounded-lg bg-[#2B5B6C] text-white text-xs font-semibold hover:bg-[#1E4350] cursor-pointer disabled:opacity-60"
+                          className="px-4 py-2 rounded-lg bg-[#6F4E37] text-white text-xs font-semibold hover:bg-[#5C402C] cursor-pointer disabled:opacity-60"
                         >
                           {launchingGuided ? 'Launching...' : 'Start for Class Students'}
                         </button>
@@ -1164,7 +1164,7 @@ export const TeacherPortalView: React.FC<TeacherPortalViewProps> = ({
                               <div className="flex flex-wrap items-center gap-2 text-xs">
                                 <span
                                   className={`font-semibold ${
-                                    act.status === 'active' ? 'text-[#2B7A78]' : 'text-[#756B63]'
+                                    act.status === 'active' ? 'text-[#6F4E37]' : 'text-[#756B63]'
                                   }`}
                                 >
                                   {act.status === 'active' ? 'Live Session' : 'Ended'}

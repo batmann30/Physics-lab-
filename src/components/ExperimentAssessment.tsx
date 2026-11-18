@@ -113,7 +113,7 @@ export const ExperimentAssessment: React.FC<ExperimentAssessmentProps> = ({
                   if (!submitted && isChosen) {
                     btnClass = 'bg-[#E6E0F0] border-[#6F4E37] text-[#302820] font-semibold';
                   } else if (submitted && isAnswer) {
-                    btnClass = 'bg-[#ECFDF5] border-[#2B7A78] text-[#1D4E4F] font-semibold';
+                    btnClass = 'bg-[#E6E0F0]/80 border-[#6F4E37] text-[#302820] font-semibold';
                   } else if (submitted && isChosen && !isAnswer) {
                     btnClass = 'bg-[#FDF2F0] border-[#B83A2D] text-[#7A271A]';
                   }
@@ -139,12 +139,12 @@ export const ExperimentAssessment: React.FC<ExperimentAssessmentProps> = ({
                 <div
                   className={`mt-2 p-3.5 rounded-lg border text-xs sm:text-sm flex items-start gap-2.5 ${
                     isCorrect
-                      ? 'bg-[#ECFDF5] border-[#A7F3D0] text-[#1D4E4F]'
+                      ? 'bg-[#E6E0F0]/60 border-[#6F4E37]/45 text-[#302820]'
                       : 'bg-white border-[#D8D1CA] text-[#302820]'
                   }`}
                 >
                   {isCorrect ? (
-                    <CheckCircle2 className="w-4 h-4 text-[#2B7A78] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                   ) : (
                     <XCircle className="w-4 h-4 text-[#B83A2D] shrink-0 mt-0.5" />
                   )}

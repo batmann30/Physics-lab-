@@ -36,7 +36,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* Account & Portal Session */}
-      <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-7 space-y-4">
+      <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-7 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#D8D1CA] pb-3">
           <div className="flex items-center gap-2 text-[#302820]">
             <UserIcon className="w-5 h-5 text-[#6F4E37]" />
@@ -102,7 +102,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </section>
 
       {/* Language Selection */}
-      <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-7 space-y-4">
+      <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-7 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h2 className="text-base font-semibold text-[#302820]">
@@ -118,7 +118,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </section>
 
       {/* Simulation & Class Defaults */}
-      <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-7 space-y-5">
+      <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-7 space-y-5">
         <h2 className="text-base font-semibold text-[#302820] pb-3 border-b border-[#D8D1CA]">
           {t.settings.simulationSection}
         </h2>
@@ -197,7 +197,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </section>
 
       {/* Server AI Connection Status (No API Key Inputs) */}
-      <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-7 space-y-3">
+      <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-7 space-y-3">
         <div className="flex items-center gap-2 text-[#302820]">
           <ShieldCheck className="w-5 h-5 text-[#6F4E37]" />
           <h2 className="text-base font-semibold">{t.settings.aiConnectionSection}</h2>

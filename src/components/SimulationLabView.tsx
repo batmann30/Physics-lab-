@@ -1053,7 +1053,7 @@ export const SimulationLabView: React.FC<SimulationLabViewProps> = ({
               {activeExperimentTitle}
             </h1>
             {experimentCompletion && (
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#2B7A78]">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#6F4E37]">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>{t.experimentLab.completedBadge}</span>
               </span>

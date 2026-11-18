@@ -75,7 +75,7 @@ export const ConceptExperimentChooserModal: React.FC<ConceptExperimentChooserMod
                     {done && (
                       <>
                         <span aria-hidden="true">·</span>
-                        <span className="text-[#2B7A78] inline-flex items-center gap-1">
+                        <span className="text-[#6F4E37] inline-flex items-center gap-1">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>{t.experimentLab.completedBadge}</span>
                         </span>

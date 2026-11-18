@@ -77,6 +77,7 @@ export interface RewardProgressState {
   attemptedQuizExpIds: string[];
   guidedActivityIds: string[];
   languagesUsed: LanguageCode[];
+  dailyChallengeDates?: string[];
 }
 
 export interface RewardActionResult {

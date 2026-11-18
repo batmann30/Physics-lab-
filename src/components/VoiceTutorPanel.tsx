@@ -1137,7 +1137,7 @@ export const VoiceTutorPanel: React.FC<VoiceTutorPanelProps> = ({
               title={autoSpeakEnabled ? 'Auto-voice On' : 'Auto-voice Muted'}
               className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-lg border text-[11px] font-semibold cursor-pointer min-h-[36px] ${
                 autoSpeakEnabled
-                  ? 'bg-[#ECFDF5] border-[#2B7A78]/35 text-[#1D4E4F]'
+                  ? 'bg-[#E6E0F0] border-[#6F4E37]/45 text-[#302820]'
                   : 'bg-white border-[#D8D1CA] text-[#756B63]'
               }`}
             >
@@ -1218,7 +1218,7 @@ export const VoiceTutorPanel: React.FC<VoiceTutorPanelProps> = ({
                 : statusInfo.tone === 'listening'
                   ? 'bg-[#FDF2F0] border-[#E5B8B0] text-[#7A271A]'
                   : statusInfo.tone === 'speaking'
-                    ? 'bg-[#ECFDF5] border-[#2B7A78]/35 text-[#1D4E4F]'
+                    ? 'bg-[#E6E0F0] border-[#6F4E37]/45 text-[#302820]'
                     : statusInfo.tone === 'processing'
                       ? 'bg-[#E6E0F0]/60 border-[#D8D1CA] text-[#6F4E37]'
                       : 'bg-white border-[#D8D1CA] text-[#5C5148]'
@@ -1229,11 +1229,11 @@ export const VoiceTutorPanel: React.FC<VoiceTutorPanelProps> = ({
               <span className="w-2 h-2 rounded-full bg-[#B83A2D] animate-pulse" />
             )}
             {statusInfo.tone === 'speaking' && (
-              <Volume2 className="w-3.5 h-3.5 text-[#2B7A78]" />
+              <Volume2 className="w-3.5 h-3.5 text-[#6F4E37]" />
             )}
             {statusInfo.tone === 'error' && <AlertCircle className="w-3 h-3" />}
             {statusInfo.tone === 'ready' && (
-              <span className="w-2 h-2 rounded-full bg-[#2B7A78]" />
+              <span className="w-2 h-2 rounded-full bg-[#6F4E37]" />
             )}
             <span>{statusInfo.label}</span>
           </span>
@@ -1495,7 +1495,7 @@ export const VoiceTutorPanel: React.FC<VoiceTutorPanelProps> = ({
                     onClick={() => onApplyParameterSuggestion(msg.parameterAdjustments!, msg.id)}
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer min-h-[36px] ${
                       isSuggestionApplied
-                        ? 'bg-[#ECFDF5] border-[#2B7A78] text-[#1D4E4F]'
+                        ? 'bg-[#E6E0F0] border-[#6F4E37] text-[#302820]'
                         : 'bg-white border-[#6F4E37] text-[#6F4E37] hover:bg-[#6F4E37] hover:text-white'
                     }`}
                   >

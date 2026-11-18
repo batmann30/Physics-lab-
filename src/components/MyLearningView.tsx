@@ -45,7 +45,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
       </div>
 
       {/* Featured Interactive Module Shortcut */}
-      <div className="bg-white rounded-2xl border border-[#D8D1CA] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <p className="text-xs font-medium text-[#6F4E37]">{t.sampleCard.kicker}</p>
           <h2 className="text-lg font-semibold text-[#302820]">
@@ -75,7 +75,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
         </div>
 
         {savedDynamicExperiments.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-[#D8D1CA] p-6 text-sm text-[#756B63]">
+          <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 text-sm text-[#756B63]">
             {t.dynamicLab.savedGeneratedEmpty}
           </div>
         ) : (
@@ -84,7 +84,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
               <article
                 key={spec.id}
                 data-testid={`saved-dynamic-card-${spec.id}`}
-                className="bg-white rounded-2xl border border-[#D8D1CA] p-5 flex flex-col justify-between space-y-4"
+                className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-5 flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
@@ -97,7 +97,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
                         <span>{t.dynamicLab.validatedSimplifiedBadge}</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 font-medium text-[#2B7A78]">
+                      <span className="inline-flex items-center gap-1 font-medium text-[#6F4E37]">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>{t.dynamicLab.validatedExactBadge}</span>
                       </span>
@@ -147,7 +147,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
           {t.conceptExplorer.scannedPageBadge}
         </h2>
         {sessions.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-[#D8D1CA] p-10 text-center">
+          <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-10 text-center">
             <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-[#E6E0F0] text-[#6F4E37] flex items-center justify-center">
               <BookOpen className="w-6 h-6" />
             </div>
@@ -171,7 +171,7 @@ export const MyLearningView: React.FC<MyLearningViewProps> = ({
             {sessions.map((session) => (
               <article
                 key={session.id}
-                className="bg-white rounded-2xl border border-[#D8D1CA] p-5 flex flex-col justify-between space-y-4"
+                className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-5 flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <p className="text-xs text-[#756B63]">

@@ -442,7 +442,7 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
                           {done && (
                             <>
                               <span aria-hidden="true">·</span>
-                              <span className="text-[#2B7A78]">Submitted</span>
+                              <span className="text-[#6F4E37]">Submitted</span>
                             </>
                           )}
                         </div>
@@ -498,7 +498,7 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
                         {done && (
                           <>
                             <span aria-hidden="true">·</span>
-                            <span className="text-[#2B7A78] inline-flex items-center gap-1">
+                            <span className="text-[#6F4E37] inline-flex items-center gap-1">
                               <CheckCircle2 className="w-3.5 h-3.5" /> Completed
                             </span>
                           </>
@@ -642,8 +642,8 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
             )}
 
             {joinSuccess && (
-              <div className="p-3 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] text-xs text-[#1D4E4F] flex items-start gap-2">
-                <UserCheck className="w-4 h-4 shrink-0 mt-0.5" />
+              <div className="p-3 rounded-xl bg-[#E6E0F0]/65 border border-[#D8D1CA] text-xs text-[#302820] flex items-start gap-2">
+                <UserCheck className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                 <span>{joinSuccess}</span>
               </div>
             )}
@@ -708,7 +708,7 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
                         Class {res.classGrade} · {new Date(res.completedAt).toLocaleDateString()}
                       </p>
                     </div>
-                    <span className="font-mono-tabular text-sm font-bold text-[#2B7A78] shrink-0">
+                    <span className="font-mono-tabular text-sm font-bold text-[#6F4E37] shrink-0">
                       {res.score}/{res.totalQuestions}
                     </span>
                   </div>

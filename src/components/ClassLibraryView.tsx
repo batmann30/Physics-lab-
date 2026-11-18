@@ -237,7 +237,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
       {/* Header + Redesigned Classroom Selector / Locked Grade Indicator */}
-      <div className="bg-white rounded-2xl border border-[#D8D1CA] p-5 sm:p-6 space-y-5">
+      <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-5 sm:p-6 space-y-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-1 max-w-2xl">
             <p className="text-xs font-semibold text-[#6F4E37] tracking-wide uppercase">
@@ -378,27 +378,27 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
           {/* Class Progress & Summary Strip */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
             <div className="md:col-span-8 grid grid-cols-3 gap-4">
-              <div className="bg-white rounded-2xl border border-[#D8D1CA] p-4 sm:p-5">
+              <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-4 sm:p-5">
                 <p className="text-xs text-[#756B63]">{t.classLibrary.statChapters}</p>
                 <p className="text-2xl font-bold text-[#302820] font-mono-tabular mt-1">
                   {curriculum.chapters.length}
                 </p>
               </div>
-              <div className="bg-white rounded-2xl border border-[#D8D1CA] p-4 sm:p-5">
+              <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-4 sm:p-5">
                 <p className="text-xs text-[#756B63]">{t.classLibrary.statInteractiveLabs}</p>
                 <p className="text-2xl font-bold text-[#6F4E37] font-mono-tabular mt-1">
                   {interactiveCount} / {classExperiments.length}
                 </p>
               </div>
-              <div className="bg-white rounded-2xl border border-[#D8D1CA] p-4 sm:p-5">
+              <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-4 sm:p-5">
                 <p className="text-xs text-[#756B63]">{t.classLibrary.statCompleted}</p>
-                <p className="text-2xl font-bold text-[#2B7A78] font-mono-tabular mt-1">
+                <p className="text-2xl font-bold text-[#6F4E37] font-mono-tabular mt-1">
                   {completedInClass} / {classExperiments.length}
                 </p>
               </div>
             </div>
 
-            <div className="md:col-span-4 bg-white rounded-2xl border border-[#D8D1CA] p-4 sm:p-5 flex flex-col justify-center space-y-2.5">
+            <div className="md:col-span-4 bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-4 sm:p-5 flex flex-col justify-center space-y-2.5">
               <div className="flex items-center justify-between text-xs font-semibold text-[#302820]">
                 <span>
                   {t.classLibrary.classPrefix} {effectiveClass} {t.classLibrary.progressLabel}
@@ -452,7 +452,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
                     className={`rounded-xl border transition-colors flex flex-col justify-between ${
                       isSelected
                         ? 'bg-[#E6E0F0]/55 border-[#6F4E37] ring-1 ring-[#6F4E37]'
-                        : 'bg-white border-[#D8D1CA] hover:border-[#6F4E37]/60'
+                        : 'bg-white/76 border-[#D8D1CA]/90 hover:bg-white/88 hover:border-[#6F4E37]/60'
                     }`}
                   >
                     <button
@@ -505,7 +505,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
           </section>
 
           {/* Search & Multi-Facet Filters */}
-          <section className="bg-white rounded-2xl border border-[#D8D1CA] p-4 sm:p-5 space-y-4">
+          <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-4 sm:p-5 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-sm font-semibold text-[#302820]">
                 <Filter className="w-4 h-4 text-[#6F4E37]" />
@@ -623,7 +623,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
 
           {/* Filtered Experiment Catalogue Grid */}
           {filteredExperiments.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-[#D8D1CA] p-10 text-center space-y-3">
+            <div className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-10 text-center space-y-3">
               <p className="text-base font-semibold text-[#302820]">
                 {t.classLibrary.noResultsTitle}
               </p>
@@ -639,7 +639,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
                   <article
                     key={exp.id}
                     data-testid={`experiment-card-${exp.id}`}
-                    className="bg-white rounded-2xl border border-[#D8D1CA] p-6 flex flex-col justify-between space-y-5 hover:border-[#6F4E37]/60 transition-colors"
+                    className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 flex flex-col justify-between space-y-5 hover:border-[#6F4E37]/60 transition-colors"
                   >
                     <div className="space-y-3">
                       {/* Metadata Line (No rounded-full pills) */}
@@ -650,7 +650,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
                         <span
                           className={`font-medium ${
                             exp.verificationStatus === 'verified_ncert'
-                              ? 'text-[#2B7A78]'
+                              ? 'text-[#6F4E37]'
                               : 'text-[#B45309]'
                           }`}
                         >
@@ -691,7 +691,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
 
                     <div className="pt-4 border-t border-[#D8D1CA] space-y-3">
                       {completion && (
-                        <div className="flex items-center justify-between text-xs font-semibold text-[#2B7A78]">
+                        <div className="flex items-center justify-between text-xs font-semibold text-[#6F4E37]">
                           <span className="inline-flex items-center gap-1.5">
                             <CheckCircle2 className="w-4 h-4" />
                             <span>{t.experimentLab.completedBadge}</span>
@@ -765,7 +765,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
                   return (
                     <article
                       key={spec.id}
-                      className="bg-white rounded-2xl border border-[#D8D1CA] p-6 flex flex-col justify-between space-y-4 hover:border-[#6F4E37]/60 transition-colors"
+                      className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 flex flex-col justify-between space-y-4 hover:border-[#6F4E37]/60 transition-colors"
                     >
                       <div className="space-y-2.5">
                         <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
@@ -786,7 +786,7 @@ export const ClassLibraryView: React.FC<ClassLibraryViewProps> = ({
 
                       <div className="pt-4 border-t border-[#D8D1CA] space-y-2.5">
                         {completion && (
-                          <div className="flex items-center justify-between text-xs font-semibold text-[#2B7A78]">
+                          <div className="flex items-center justify-between text-xs font-semibold text-[#6F4E37]">
                             <span className="inline-flex items-center gap-1.5">
                               <CheckCircle2 className="w-4 h-4" />
                               <span>{t.experimentLab.completedBadge}</span>

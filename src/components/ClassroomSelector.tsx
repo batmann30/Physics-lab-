@@ -110,16 +110,16 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({
             <div
               key={cls}
               data-testid={`classroom-card-${cls}`}
-              className={`rounded-2xl border transition-colors overflow-hidden ${
+              className={`rounded-2xl border transition-colors overflow-hidden shadow-[0_2px_14px_rgba(48,40,32,0.04)] ${
                 isSelected
-                  ? 'bg-white border-[#6F4E37] ring-1 ring-[#6F4E37]/25'
-                  : 'bg-white border-[#D8D1CA] hover:border-[#6F4E37]/60'
+                  ? 'bg-white/78 border-[#6F4E37] ring-1 ring-[#6F4E37]/25'
+                  : 'bg-white/74 border-[#D8D1CA]/90 hover:bg-white/86 hover:border-[#6F4E37]/60'
               }`}
             >
               {/* Classroom Header Row */}
               <div
                 className={`p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 ${
-                  isSelected ? 'bg-[#F7F5F2]' : 'bg-white'
+                  isSelected ? 'bg-[#F7F5F2]/65' : 'bg-transparent'
                 }`}
               >
                 <div className="flex items-start gap-4 flex-1 min-w-0">

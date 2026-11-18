@@ -289,9 +289,9 @@ export const CompanionDock: React.FC<CompanionDockProps> = ({
         {latestBadgeToast && (
           <div
             data-testid="badge-unlock-toast"
-            className="pointer-events-auto rounded-xl bg-[#302820] text-white px-3 py-2 shadow-lg border border-[#D97706]/60 flex items-center gap-2.5 max-w-[290px]"
+            className="pointer-events-auto rounded-xl bg-[#302820] text-white px-3 py-2 shadow-lg border border-[#E6E0F0]/50 flex items-center gap-2.5 max-w-[290px]"
           >
-            <Trophy className="w-4 h-4 text-[#FBBF24] shrink-0" aria-hidden="true" />
+            <Trophy className="w-4 h-4 text-[#E6E0F0] shrink-0" aria-hidden="true" />
             <div className="min-w-0 flex-1">
               <p className="text-[11px] font-bold leading-tight truncate">
                 {copy.badgeEarnedPrefix} {latestBadgeToast.title[language]}

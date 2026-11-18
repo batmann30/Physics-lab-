@@ -92,9 +92,9 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
 
   const isTeacher = mode === 'register' && selectedRole === 'teacher';
   const accentBg = isTeacher
-    ? 'bg-[#2B5B6C] hover:bg-[#1E4350]'
+    ? 'bg-[#302820] hover:bg-[#5C402C]'
     : 'bg-[#6F4E37] hover:bg-[#5C402C]';
-  const accentText = isTeacher ? 'text-[#2B5B6C]' : 'text-[#6F4E37]';
+  const accentText = 'text-[#6F4E37]';
 
   const handleModeSwitch = (nextMode: 'login' | 'register') => {
     setMode(nextMode);
@@ -239,7 +239,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Auth Form (Sign In / Create Account) */}
-        <div className="lg:col-span-7 bg-white rounded-2xl border border-[#D8D1CA] p-6 sm:p-8 space-y-6">
+        <div className="lg:col-span-7 bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-8 space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#D8D1CA] pb-4">
             <div className="space-y-0.5">
               <span className={`text-xs font-semibold ${accentText}`}>
@@ -283,7 +283,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                 onClick={() => handleModeSwitch('register')}
                 className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold cursor-pointer transition-colors whitespace-nowrap min-h-[38px] ${
                   mode === 'register'
-                    ? `${selectedRole === 'teacher' ? 'bg-[#2B5B6C]' : 'bg-[#6F4E37]'} text-white`
+                    ? `${selectedRole === 'teacher' ? 'bg-[#302820]' : 'bg-[#6F4E37]'} text-white`
                     : 'text-[#302820] hover:bg-white/70'
                 }`}
               >
@@ -336,17 +336,17 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                     }}
                     className={`text-left p-4 rounded-xl border transition-colors cursor-pointer space-y-1 ${
                       selectedRole === 'teacher'
-                        ? 'bg-[#E8F1F4] border-[#2B5B6C] ring-1 ring-[#2B5B6C]'
-                        : 'bg-[#F7F5F2] border-[#D8D1CA] hover:border-[#2B5B6C]/60'
+                        ? 'bg-[#E6E0F0]/75 border-[#302820] ring-1 ring-[#302820]'
+                        : 'bg-[#F7F5F2] border-[#D8D1CA] hover:border-[#6F4E37]/60'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 font-semibold text-sm text-[#302820]">
-                        <Users className="w-4 h-4 text-[#2B5B6C]" />
+                        <Users className="w-4 h-4 text-[#6F4E37]" />
                         <span>Teacher</span>
                       </div>
                       {selectedRole === 'teacher' && (
-                        <CheckCircle2 className="w-4 h-4 text-[#2B5B6C]" />
+                        <CheckCircle2 className="w-4 h-4 text-[#6F4E37]" />
                       )}
                     </div>
                     <p className="text-xs text-[#756B63]">
@@ -480,7 +480,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                       value={schoolOrSubject}
                       onChange={(e) => setSchoolOrSubject(e.target.value)}
                       placeholder="e.g., Kendriya Vidyalaya · Classes 6–10 Physics"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#D8D1CA] bg-[#F7F5F2] text-sm text-[#302820] focus:outline-none focus:border-[#2B5B6C]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#D8D1CA] bg-[#F7F5F2] text-sm text-[#302820] focus:outline-none focus:border-[#6F4E37]"
                     />
                   </label>
                 )}
@@ -499,8 +499,8 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
             )}
 
             {infoMessage && (
-              <div className="p-3.5 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] text-xs sm:text-sm text-[#1D4E4F] flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-xl bg-[#E6E0F0]/65 border border-[#D8D1CA] text-xs sm:text-sm text-[#302820] flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#6F4E37] shrink-0 mt-0.5" />
                 <span>{infoMessage}</span>
               </div>
             )}
@@ -524,7 +524,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
 
         {/* Right Column: Local Demo Account Switcher & Role Isolation Info */}
         <div className="lg:col-span-5 space-y-5">
-          <section className="bg-white rounded-2xl border border-[#D8D1CA] p-6 space-y-4">
+          <section className="bg-white/78 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 space-y-4">
             <div className="flex items-center justify-between gap-2 border-b border-[#D8D1CA] pb-3">
               <div>
                 <h2 className="text-base font-bold text-[#302820]">Saved Local Accounts</h2>
@@ -568,9 +568,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                       key={acc.uid}
                       className={`rounded-xl border p-3.5 transition-colors space-y-2 ${
                         isSelectedForLogin
-                          ? isTeacherAccount
-                            ? 'bg-[#E8F1F4]/60 border-[#2B5B6C]'
-                            : 'bg-[#E6E0F0]/60 border-[#6F4E37]'
+                          ? 'bg-[#E6E0F0]/65 border-[#6F4E37]'
                           : 'bg-[#F7F5F2] border-[#D8D1CA] hover:border-[#6F4E37]/60'
                       }`}
                     >
@@ -583,7 +581,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                         >
                           <div className="flex items-center gap-2">
                             {isTeacherAccount ? (
-                              <Users className="w-3.5 h-3.5 text-[#2B5B6C] shrink-0" />
+                              <Users className="w-3.5 h-3.5 text-[#6F4E37] shrink-0" />
                             ) : (
                               <GraduationCap className="w-3.5 h-3.5 text-[#6F4E37] shrink-0" />
                             )}
@@ -594,7 +592,7 @@ export const AuthPortalView: React.FC<AuthPortalViewProps> = ({
                           <p className="text-xs text-[#756B63] truncate">
                             <span className="font-mono text-[#302820]">@{acc.username}</span>
                             <span aria-hidden="true"> · </span>
-                            <span className={isTeacherAccount ? 'text-[#2B5B6C]' : 'text-[#6F4E37]'}>
+                            <span className="text-[#6F4E37] font-medium">
                               {isTeacherAccount
                                 ? 'Teacher'
                                 : `Student · Class ${acc.selectedClass ?? 6}`}

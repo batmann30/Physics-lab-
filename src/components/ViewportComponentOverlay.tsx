@@ -106,7 +106,7 @@ function getComponentIcon(iconKey?: ComponentIconKey, componentId?: string) {
   if (componentId && ['vibrating_source', 'compression', 'rarefaction', 'wave'].includes(componentId)) {
     return {
       Icon: Activity,
-      tintClass: 'bg-[#E8F1F4] text-[#2B5B6C] border-[#2B5B6C]/30',
+      tintClass: 'bg-[#E6E0F0] text-[#6F4E37] border-[#D8D1CA]',
     };
   }
   if (

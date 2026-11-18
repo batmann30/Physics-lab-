@@ -107,14 +107,14 @@ export const CurriculumCoveragePanel: React.FC<CurriculumCoveragePanelProps> = (
                     <td className="py-3.5 px-4 font-mono-tabular text-[#302820]">
                       {row.totalExperimentsListed}
                     </td>
-                    <td className="py-3.5 px-4 font-mono-tabular font-semibold text-[#2B7A78]">
+                    <td className="py-3.5 px-4 font-mono-tabular font-semibold text-[#6F4E37]">
                       {row.implementedCount} / {row.simulatableCount}
                     </td>
                     <td className="py-3.5 px-4 font-mono-tabular text-[#756B63]">
                       {row.reusedFromOtherClassesCount}
                     </td>
                     <td className="py-3.5 px-4 text-xs">
-                      <span className="inline-flex items-center gap-1 text-[#2B7A78] font-medium mr-3">
+                      <span className="inline-flex items-center gap-1 text-[#6F4E37] font-medium mr-3">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         {row.verifiedCount} verified
                       </span>

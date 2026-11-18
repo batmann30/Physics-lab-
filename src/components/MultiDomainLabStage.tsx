@@ -1097,7 +1097,7 @@ export const MultiDomainLabStage: React.FC<MultiDomainLabStageProps> = ({
             onClick={() => setSwitchClosed((s) => !s)}
             className={`w-full py-2 px-3 rounded-lg text-xs font-semibold border cursor-pointer ${
               switchClosed
-                ? 'bg-[#ECFDF5] border-[#2B7A78] text-[#1D4E4F]'
+                ? 'bg-[#E6E0F0] border-[#6F4E37] text-[#302820]'
                 : 'bg-[#FDF2F0] border-[#B83A2D] text-[#7A271A]'
             }`}
           >

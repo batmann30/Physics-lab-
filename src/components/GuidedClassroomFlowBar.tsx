@@ -200,8 +200,8 @@ export const GuidedClassroomFlowBar: React.FC<GuidedClassroomFlowBarProps> = ({
 
         <div className="flex items-center gap-2 shrink-0">
           {submitted && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#ECFDF5] border border-[#A7F3D0] text-xs font-semibold text-[#1D4E4F]">
-              <CheckCircle2 className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#E6E0F0]/75 border border-[#D8D1CA] text-xs font-semibold text-[#302820]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#6F4E37]" />
               <span>{copy.finishedBadge}</span>
             </span>
           )}
@@ -364,7 +364,7 @@ export const GuidedClassroomFlowBar: React.FC<GuidedClassroomFlowBarProps> = ({
                 <span
                   className={`text-xs font-semibold ${
                     selectedPrediction === activity.correctPredictionIndex
-                      ? 'text-[#2B7A78]'
+                      ? 'text-[#302820]'
                       : 'text-[#6F4E37]'
                   }`}
                 >
@@ -392,12 +392,12 @@ export const GuidedClassroomFlowBar: React.FC<GuidedClassroomFlowBarProps> = ({
                 onClick={() => void handleFinish()}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6F4E37] hover:bg-[#5C402C] text-white text-xs sm:text-sm font-semibold cursor-pointer disabled:opacity-60"
               >
-                <Trophy className="w-4 h-4 text-[#FBBF24]" />
+                <Trophy className="w-4 h-4 text-[#E6E0F0]" />
                 <span>{submitting ? 'Submitting...' : copy.finishBtn}</span>
               </button>
             ) : (
-              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] text-xs font-semibold text-[#1D4E4F]">
-                <CheckCircle2 className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#E6E0F0]/75 border border-[#D8D1CA] text-xs font-semibold text-[#302820]">
+                <CheckCircle2 className="w-4 h-4 text-[#6F4E37]" />
                 <span>{copy.finishedBadge}</span>
               </div>
             )}

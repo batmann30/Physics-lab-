@@ -246,9 +246,9 @@ export const PhysixCompanionAvatar: React.FC<PhysixCompanionAvatarProps> = ({
 
         {/* Orbiting Celebration Accents when celebrating or excited */}
         {(emotion === 'celebrating' || emotion === 'excited') && (
-          <g fill="#D97706">
-            <circle cx="17" cy="24" r="2.2" />
-            <circle cx="83" cy="22" r="2.5" />
+          <g fill="#6F4E37">
+            <circle cx="17" cy="24" r="2.3" />
+            <circle cx="83" cy="22" r="2.6" />
             <path d="M 86 42 L 88 46 L 92 48 L 88 50 L 86 54 L 84 50 L 80 48 L 84 46 Z" />
           </g>
         )}
@@ -275,16 +275,28 @@ export const PhysixCompanionAvatar: React.FC<PhysixCompanionAvatarProps> = ({
           strokeWidth="1.2"
           strokeLinejoin="round"
         />
-        {/* Brass Lab Pin */}
-        <circle cx="60" cy="80" r="2.6" fill="#D97706" stroke="#302820" strokeWidth="1" />
+        {/* Lab Pin */}
+        <circle cx="60" cy="80" r="2.6" fill="#E6E0F0" stroke="#302820" strokeWidth="1" />
 
-        {/* Left Articulated Pointer Arm */}
-        <g
+        {/* Left Articulated Pointer / Waving Arm */}
+        <motion.g
           style={{
-            transform: `rotate(${armRotateLeft}deg)`,
             transformOrigin: '28px 76px',
-            transition: reducedMotion ? 'none' : 'transform 220ms ease-out',
           }}
+          animate={
+            reducedMotion
+              ? { rotate: armRotateLeft }
+              : pointTarget === 'wave'
+                ? { rotate: [-110, -142, -104, -140, -112] }
+                : { rotate: armRotateLeft }
+          }
+          transition={
+            reducedMotion
+              ? { duration: 0 }
+              : pointTarget === 'wave'
+                ? { duration: 1.1, repeat: Infinity, ease: 'easeInOut' }
+                : { duration: 0.22, ease: 'easeOut' }
+          }
         >
           <path
             d="M 28 76 C 18 76, 13 80, 11 85"
@@ -294,7 +306,7 @@ export const PhysixCompanionAvatar: React.FC<PhysixCompanionAvatarProps> = ({
             strokeLinecap="round"
           />
           <circle cx="10.5" cy="85.5" r="3.4" fill="#F7F5F2" stroke="#302820" strokeWidth="1.3" />
-        </g>
+        </motion.g>
 
         {/* Right Articulated Pointer Arm */}
         <g
@@ -332,7 +344,7 @@ export const PhysixCompanionAvatar: React.FC<PhysixCompanionAvatarProps> = ({
           cx="50"
           cy="14.5"
           r="3.8"
-          fill={emotion === 'speaking' || emotion === 'excited' ? '#D97706' : '#6F4E37'}
+          fill={emotion === 'speaking' || emotion === 'excited' || emotion === 'celebrating' ? '#E6E0F0' : '#6F4E37'}
           stroke="#302820"
           strokeWidth="1.3"
         />

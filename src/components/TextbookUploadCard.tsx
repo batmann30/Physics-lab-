@@ -137,7 +137,7 @@ export const TextbookUploadCard: React.FC<TextbookUploadCardProps> = ({
     <section
       id="textbook-upload-section"
       aria-labelledby="upload-card-title"
-      className="bg-white rounded-2xl border border-[#D8D1CA] shadow-xs p-6 sm:p-8 flex flex-col justify-between"
+      className="bg-white/76 rounded-2xl border border-[#D8D1CA]/90 shadow-[0_4px_20px_rgba(48,40,32,0.04)] p-6 sm:p-8 flex flex-col justify-between"
     >
       <div>
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
@@ -181,7 +181,7 @@ export const TextbookUploadCard: React.FC<TextbookUploadCardProps> = ({
             className={`rounded-xl border-2 border-dashed transition-colors duration-150 p-7 sm:p-9 text-center ${
               isDragging
                 ? 'border-[#6F4E37] bg-[#E6E0F0]/35'
-                : 'border-[#D8D1CA] bg-[#F7F5F2]/70 hover:border-[#6F4E37]/60'
+                : 'border-[#D8D1CA] bg-[#F7F5F2]/62 hover:border-[#6F4E37]/60'
             }`}
           >
             <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-[#E6E0F0] text-[#6F4E37] flex items-center justify-center">

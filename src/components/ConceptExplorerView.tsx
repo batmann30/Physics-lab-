@@ -382,7 +382,7 @@ export const ConceptExplorerView: React.FC<ConceptExplorerViewProps> = ({
             <div className="space-y-1.5 max-w-3xl">
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
                 {effectiveMatch.matchType === 'exact_existing' ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#E8F4F2] text-[#2B7A78] border border-[#CBE5E0]">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#E6E0F0] text-[#6F4E37] border border-[#D8D1CA]">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>{t.dynamicLab.registryExactMatchLabel}</span>
                   </span>
