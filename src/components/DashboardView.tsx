@@ -5,6 +5,7 @@ import {
   Award,
   CheckCircle2,
   Compass,
+  ExternalLink,
   Flame,
   FlaskConical,
   GraduationCap,
@@ -880,6 +881,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <Compass className="w-4 h-4 text-[#6F4E37]" />
                 <span>{copy.exploreExperimentsBtn}</span>
               </button>
+
+              <a
+                href="https://gurukooolaii.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="hero-stem-lab-btn"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl border border-[#6F4E37]/45 bg-white/85 text-[#302820] text-sm font-semibold hover:bg-white hover:border-[#6F4E37] active:scale-[0.98] transition-all duration-150 cursor-pointer min-h-[44px] whitespace-nowrap shadow-xs focus-visible:outline-2 focus-visible:outline-[#6F4E37] focus-visible:outline-offset-2"
+              >
+                <FlaskConical className="w-4 h-4 text-[#6F4E37]" />
+                <span>Stem lab</span>
+                <ExternalLink className="w-3.5 h-3.5 text-[#756B63]" />
+              </a>
             </div>
           </div>
 
